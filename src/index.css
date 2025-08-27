@@ -252,3 +252,29 @@
   @apply bg-white border-r border-gray-200;
   box-shadow: 2px 0 4px -1px rgba(0, 0, 0, 0.1);
 }
+
+/* Mobile sidebar adjustments */
+@media (max-width: 1023px) {
+  .sidebar-unified {
+    font-size: 0.875rem;
+  }
+  
+  .sidebar-unified h1 {
+    font-size: 1.25rem;
+  }
+  
+  .sidebar-unified .px-3 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .sidebar-unified button {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .sidebar-unified .h-5 {
+    height: 1rem;
+    width: 1rem;
+  }
+}

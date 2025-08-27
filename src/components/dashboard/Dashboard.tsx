@@ -145,12 +145,12 @@ export function Dashboard() {
                 </p>
               </div>
 
-              {/* Desktop Add Button */}
+              {/* Add Button - Always visible */}
               <button
                 onClick={handleAddTask}
-                className="hidden lg:flex items-center space-x-2 unified-btn-primary"
+                className="flex items-center space-x-2 unified-btn-primary text-sm sm:text-base"
               >
-                <Plus className="h-5 w-5" />
+                <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span>Tambah Tugas</span>
               </button>
             </div>
@@ -208,7 +208,7 @@ export function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Sidebar */}
+      {/* Sidebar - Always visible */}
       <Sidebar
         currentFilter={currentFilter}
         onFilterChange={setCurrentFilter}
@@ -217,29 +217,11 @@ export function Dashboard() {
       />
 
       {/* Main Content */}
-      <div className="lg:pl-64 pb-20 lg:pb-0">
+      <div className="pl-64">
         <div className="unified-container unified-spacing">
           {renderMainContent()}
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      <MobileNavigation
-        currentView={currentView}
-        onViewChange={setCurrentView}
-        onAddTask={handleAddTask}
-        onShowFilters={() => setShowFilterModal(true)}
-      />
-
-      {/* Floating Add Button (Mobile) */}
-      {currentView === 'tasks' && (
-        <button
-          onClick={handleAddTask}
-          className="lg:hidden fixed bottom-20 right-4 w-14 h-14 unified-btn-primary rounded-full shadow-lg flex items-center justify-center z-40"
-        >
-          <Plus className="h-6 w-6" />
-        </button>
-      )}
 
       {/* Modals */}
       {showTaskForm && (
