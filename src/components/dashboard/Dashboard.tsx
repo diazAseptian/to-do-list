@@ -217,7 +217,7 @@ export function Dashboard() {
       />
 
       {/* Main Content */}
-      <div className="pl-64">
+      <div className="pl-48 sm:pl-56 lg:pl-64">
         <div className="unified-container unified-spacing">
           {renderMainContent()}
         </div>
