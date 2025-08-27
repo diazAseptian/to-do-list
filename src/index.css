@@ -187,3 +187,68 @@
     font-size: 12px;
   }
 }
+
+/* Unified mobile-desktop styling */
+.unified-container {
+  @apply max-w-7xl mx-auto;
+}
+
+.unified-grid {
+  @apply grid gap-4;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+@media (min-width: 640px) {
+  .unified-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    @apply gap-6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .unified-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+/* Consistent spacing */
+.unified-spacing {
+  @apply p-4;
+}
+
+@media (min-width: 1024px) {
+  .unified-spacing {
+    @apply p-8;
+  }
+}
+
+/* Consistent card styling */
+.unified-card {
+  @apply bg-white rounded-xl shadow-md transition-all hover:shadow-lg;
+}
+
+/* Consistent button styling */
+.unified-btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-3 rounded-xl transition-colors;
+}
+
+.unified-btn-secondary {
+  @apply bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-3 rounded-xl transition-colors;
+}
+
+/* Consistent input styling */
+.unified-input {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+}
+
+/* Mobile navigation improvements */
+.mobile-nav-unified {
+  @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar improvements for consistency */
+.sidebar-unified {
+  @apply bg-white border-r border-gray-200;
+  box-shadow: 2px 0 4px -1px rgba(0, 0, 0, 0.1);
+}

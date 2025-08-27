@@ -137,10 +137,10 @@ export function Dashboard() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
                   {currentFilter === 'Semua' ? 'Semua Tugas' : currentFilter}
                 </h1>
-                <p className="text-gray-600">
+                <p className="text-sm sm:text-base text-gray-600">
                   {filteredTasks.length} dari {tasks.length} tugas
                 </p>
               </div>
@@ -148,7 +148,7 @@ export function Dashboard() {
               {/* Desktop Add Button */}
               <button
                 onClick={handleAddTask}
-                className="hidden lg:flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors"
+                className="hidden lg:flex items-center space-x-2 unified-btn-primary"
               >
                 <Plus className="h-5 w-5" />
                 <span>Tambah Tugas</span>
@@ -163,13 +163,13 @@ export function Dashboard() {
                 placeholder="Cari tugas..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="unified-input pl-10"
               />
             </div>
 
             {/* Tasks Grid */}
             {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="unified-grid">
                 {[...Array(6)].map((_, i) => (
                   <div key={i} className="bg-gray-200 rounded-xl h-48 animate-pulse" />
                 ))}
@@ -183,13 +183,13 @@ export function Dashboard() {
                 <p className="text-gray-600 mb-4">Mulai dengan menambahkan tugas baru</p>
                 <button
                   onClick={handleAddTask}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-colors"
+                  className="unified-btn-primary px-6"
                 >
                   Tambah Tugas Pertama
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="unified-grid">
                 {filteredTasks.map((task) => (
                   <TaskCard
                     key={task.id}
@@ -218,7 +218,7 @@ export function Dashboard() {
 
       {/* Main Content */}
       <div className="lg:pl-64 pb-20 lg:pb-0">
-        <div className="p-4 lg:p-8">
+        <div className="unified-container unified-spacing">
           {renderMainContent()}
         </div>
       </div>
@@ -235,7 +235,7 @@ export function Dashboard() {
       {currentView === 'tasks' && (
         <button
           onClick={handleAddTask}
-          className="lg:hidden fixed bottom-20 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg flex items-center justify-center z-40"
+          className="lg:hidden fixed bottom-20 right-4 w-14 h-14 unified-btn-primary rounded-full shadow-lg flex items-center justify-center z-40"
         >
           <Plus className="h-6 w-6" />
         </button>

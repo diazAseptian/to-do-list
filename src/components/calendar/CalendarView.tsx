@@ -56,8 +56,8 @@ export function CalendarView({ tasks }: CalendarViewProps) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-md p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Kalender Tugas</h2>
+      <div className="unified-card unified-spacing">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Kalender Tugas</h2>
         
         <div className="calendar-container">
           <Calendar
@@ -74,8 +74,8 @@ export function CalendarView({ tasks }: CalendarViewProps) {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="unified-card unified-spacing">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
           Tugas untuk {format(selectedDate, 'dd MMMM yyyy')}
         </h3>
         
@@ -87,12 +87,12 @@ export function CalendarView({ tasks }: CalendarViewProps) {
         ) : (
           <div className="space-y-3">
             {tasksForSelectedDate.map((task) => (
-              <div key={task.id} className="border border-gray-200 rounded-xl p-4">
+              <div key={task.id} className="border border-gray-200 rounded-xl p-3 sm:p-4">
                 <div className="flex items-start justify-between mb-2">
-                  <h4 className="font-medium text-gray-900">{task.judul}</h4>
-                  <div className="flex items-center space-x-1">
+                  <h4 className="font-medium text-gray-900 text-sm sm:text-base truncate mr-2">{task.judul}</h4>
+                  <div className="flex items-center space-x-1 flex-shrink-0">
                     <AlertTriangle className={`h-4 w-4 ${getPriorityColor(task.prioritas)}`} />
-                    <span className={`text-sm ${getPriorityColor(task.prioritas)}`}>
+                    <span className={`text-xs sm:text-sm ${getPriorityColor(task.prioritas)}`}>
                       {task.prioritas}
                     </span>
                   </div>

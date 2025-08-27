@@ -25,7 +25,7 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
 
   return (
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
-      <div className="flex-1 flex flex-col min-h-0 bg-white border-r border-gray-200">
+      <div className="flex-1 flex flex-col min-h-0 sidebar-unified">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4">
             <h1 className="text-2xl font-bold text-gray-900">TaskFlow</h1>
@@ -46,9 +46,9 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
                   onClick={() => onViewChange(view.id as any)}
                   className={`${
                     currentView === view.id
-                      ? 'bg-blue-50 border-blue-500 text-blue-700'
+                      ? 'bg-blue-50 border-blue-500 text-blue-700 shadow-sm'
                       : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                  } group flex items-center px-3 py-2 text-sm font-medium border-r-2 w-full rounded-lg transition-colors`}
+                  } group flex items-center px-3 py-3 text-sm font-medium border-r-2 w-full rounded-lg transition-all`}
                 >
                   <Icon className="flex-shrink-0 -ml-1 mr-3 h-5 w-5" />
                   {view.label}
@@ -72,9 +72,9 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
                       onClick={() => onFilterChange(category.id)}
                       className={`${
                         currentFilter === category.id
-                          ? 'bg-gray-50 text-gray-900 border-r-2 border-blue-500'
+                          ? 'bg-gray-50 text-gray-900 border-r-2 border-blue-500 shadow-sm'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                      } group flex items-center px-3 py-2 text-sm font-medium w-full rounded-lg transition-colors`}
+                      } group flex items-center px-3 py-3 text-sm font-medium w-full rounded-lg transition-all`}
                     >
                       <Icon className={`flex-shrink-0 -ml-1 mr-3 h-5 w-5 ${category.color}`} />
                       {category.label}

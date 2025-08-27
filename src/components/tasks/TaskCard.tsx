@@ -44,12 +44,12 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
     isBefore(new Date(task.deadline), new Date(Date.now() + 24 * 60 * 60 * 1000));
 
   return (
-    <div className={`bg-white rounded-xl shadow-md p-6 transition-all hover:shadow-lg border-l-4 ${
+    <div className={`unified-card p-4 sm:p-6 border-l-4 ${
       isOverdue ? 'border-red-500' : isDueSoon ? 'border-yellow-500' : 'border-blue-500'
     }`}>
       <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{task.judul}</h3>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 truncate">{task.judul}</h3>
           <div className="flex flex-wrap gap-2 mb-3">
             <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(task.kategori)}`}>
               {task.kategori}
@@ -63,16 +63,16 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
           </div>
         </div>
         
-        <div className="flex space-x-2">
+        <div className="flex space-x-1 ml-2">
           <button
             onClick={() => onEdit(task)}
-            className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+            className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
           >
             <Edit className="h-4 w-4" />
           </button>
           <button
             onClick={() => onDelete(task.id)}
-            className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
           >
             <Trash2 className="h-4 w-4" />
           </button>
@@ -83,8 +83,8 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">{task.deskripsi}</p>
       )}
 
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4 text-sm text-gray-500">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-gray-500">
           {task.deadline && (
             <div className={`flex items-center space-x-1 ${isOverdue ? 'text-red-600' : isDueSoon ? 'text-yellow-600' : ''}`}>
               <Calendar className="h-4 w-4" />
@@ -100,10 +100,10 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
         {task.status !== 'Selesai' && (
           <button
             onClick={() => onStatusUpdate(task.id, 'Selesai')}
-            className="flex items-center space-x-1 text-green-600 hover:text-green-700 transition-colors"
+            className="flex items-center justify-center space-x-1 text-green-600 hover:text-green-700 hover:bg-green-50 px-3 py-2 rounded-lg transition-all self-start sm:self-auto"
           >
             <CheckCircle className="h-4 w-4" />
-            <span className="text-sm">Selesai</span>
+            <span className="text-sm font-medium">Selesai</span>
           </button>
         )}
       </div>

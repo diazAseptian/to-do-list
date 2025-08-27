@@ -36,7 +36,7 @@ export function FilterModal({ onClose, onApplyFilters, currentFilters }: FilterM
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end lg:items-center lg:justify-center p-4 z-50">
-      <div className="bg-white rounded-t-2xl lg:rounded-2xl shadow-xl w-full max-w-md">
+      <div className="unified-card rounded-t-2xl lg:rounded-2xl w-full max-w-md">
         <div className="flex justify-between items-center p-6 border-b">
           <div className="flex items-center space-x-2">
             <Filter className="h-5 w-5 text-blue-600" />
@@ -119,16 +119,16 @@ export function FilterModal({ onClose, onApplyFilters, currentFilters }: FilterM
             </div>
           </div>
 
-          <div className="flex space-x-3 pt-4">
+          <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
             <button
               onClick={handleReset}
-              className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"
+              className="flex-1 unified-btn-secondary"
             >
               Reset
             </button>
             <button
               onClick={handleApply}
-              className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+              className="flex-1 unified-btn-primary"
             >
               Terapkan
             </button>

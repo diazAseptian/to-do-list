@@ -73,7 +73,7 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="unified-input pl-10 focus:ring-green-500"
                 placeholder="masukkan@email.com"
                 required
               />
@@ -90,7 +90,7 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="unified-input pl-10 pr-12 focus:ring-green-500"
                 placeholder="Minimal 6 karakter"
                 required
               />
@@ -114,7 +114,7 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
                 type={showPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                className="unified-input pl-10 focus:ring-green-500"
                 placeholder="Ulangi password"
                 required
               />
@@ -124,7 +124,7 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-3 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Memproses...' : 'Daftar'}
           </button>

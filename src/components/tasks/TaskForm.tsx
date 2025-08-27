@@ -55,7 +55,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="unified-card w-full max-w-md max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-900">
             {task ? 'Edit Tugas' : 'Tambah Tugas Baru'}
@@ -79,7 +79,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
                 type="text"
                 value={formData.judul}
                 onChange={(e) => handleChange('judul', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="unified-input pl-10"
                 placeholder="Masukkan judul tugas"
                 required
               />
@@ -96,7 +96,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
                 <select
                   value={formData.kategori}
                   onChange={(e) => handleChange('kategori', e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="unified-input pl-10"
                 >
                   <option value="Kuliah">Kuliah</option>
                   <option value="Himpunan">Himpunan</option>
@@ -115,7 +115,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
                 <select
                   value={formData.prioritas}
                   onChange={(e) => handleChange('prioritas', e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="unified-input pl-10"
                 >
                   <option value="High">High</option>
                   <option value="Medium">Medium</option>
@@ -136,7 +136,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
                   type="date"
                   value={formData.deadline}
                   onChange={(e) => handleChange('deadline', e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="unified-input pl-10"
                 />
               </div>
             </div>
@@ -148,7 +148,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
               <select
                 value={formData.status}
                 onChange={(e) => handleChange('status', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="unified-input"
               >
                 <option value="Belum dikerjakan">Belum dikerjakan</option>
                 <option value="Sedang dikerjakan">Sedang dikerjakan</option>
@@ -165,22 +165,22 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
               value={formData.deskripsi}
               onChange={(e) => handleChange('deskripsi', e.target.value)}
               rows={4}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+              className="unified-input resize-none"
               placeholder="Deskripsi tugas (opsional)"
             />
           </div>
 
-          <div className="flex space-x-3">
+          <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"
+              className="flex-1 unified-btn-secondary"
             >
               Batal
             </button>
             <button
               type="submit"
-              className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+              className="flex-1 unified-btn-primary"
             >
               {task ? 'Perbarui' : 'Tambah'} Tugas
             </button>

@@ -49,7 +49,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="unified-input pl-10"
                 placeholder="masukkan@email.com"
                 required
               />
@@ -66,7 +66,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="unified-input pl-10 pr-12"
                 placeholder="Masukkan password"
                 required
               />
@@ -83,7 +83,7 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full unified-btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Memproses...' : 'Masuk'}
           </button>

@@ -58,14 +58,14 @@ export function ProfileView() {
   return (
     <div className="space-y-6">
       {/* Profile Card */}
-      <div className="bg-white rounded-2xl shadow-md p-6">
+      <div className="unified-card unified-spacing">
         <div className="flex items-center space-x-4 mb-6">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-            <User className="h-8 w-8 text-blue-600" />
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center">
+            <User className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">Profil Pengguna</h2>
-            <p className="text-gray-600">Kelola akun dan data Anda</p>
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Profil Pengguna</h2>
+            <p className="text-sm sm:text-base text-gray-600">Kelola akun dan data Anda</p>
           </div>
         </div>
 
@@ -81,34 +81,34 @@ export function ProfileView() {
       </div>
 
       {/* Statistics Card */}
-      <div className="bg-white rounded-2xl shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Statistik Tugas</h3>
+      <div className="unified-card unified-spacing">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Statistik Tugas</h3>
         
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="text-center p-4 bg-blue-50 rounded-xl">
-            <div className="text-2xl font-bold text-blue-600">{taskStats.total}</div>
-            <div className="text-sm text-gray-600">Total Tugas</div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="text-center p-3 sm:p-4 bg-blue-50 rounded-xl">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">{taskStats.total}</div>
+            <div className="text-xs sm:text-sm text-gray-600">Total Tugas</div>
           </div>
-          <div className="text-center p-4 bg-green-50 rounded-xl">
-            <div className="text-2xl font-bold text-green-600">{taskStats.completed}</div>
-            <div className="text-sm text-gray-600">Selesai</div>
+          <div className="text-center p-3 sm:p-4 bg-green-50 rounded-xl">
+            <div className="text-xl sm:text-2xl font-bold text-green-600">{taskStats.completed}</div>
+            <div className="text-xs sm:text-sm text-gray-600">Selesai</div>
           </div>
-          <div className="text-center p-4 bg-yellow-50 rounded-xl">
-            <div className="text-2xl font-bold text-yellow-600">{taskStats.inProgress}</div>
-            <div className="text-sm text-gray-600">Sedang Dikerjakan</div>
+          <div className="text-center p-3 sm:p-4 bg-yellow-50 rounded-xl">
+            <div className="text-xl sm:text-2xl font-bold text-yellow-600">{taskStats.inProgress}</div>
+            <div className="text-xs sm:text-sm text-gray-600">Sedang Dikerjakan</div>
           </div>
-          <div className="text-center p-4 bg-gray-50 rounded-xl">
-            <div className="text-2xl font-bold text-gray-600">{taskStats.pending}</div>
-            <div className="text-sm text-gray-600">Belum Dikerjakan</div>
+          <div className="text-center p-3 sm:p-4 bg-gray-50 rounded-xl">
+            <div className="text-xl sm:text-2xl font-bold text-gray-600">{taskStats.pending}</div>
+            <div className="text-xs sm:text-sm text-gray-600">Belum Dikerjakan</div>
           </div>
         </div>
       </div>
 
       {/* Export Data Card */}
-      <div className="bg-white rounded-2xl shadow-md p-6">
+      <div className="unified-card unified-spacing">
         <div className="flex items-center space-x-2 mb-4">
           <Download className="h-5 w-5 text-gray-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Export Data</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900">Export Data</h3>
         </div>
         
         <p className="text-gray-600 mb-4">
@@ -118,7 +118,7 @@ export function ProfileView() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={handleExportPDF}
-            className="flex items-center justify-center space-x-2 p-4 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors"
+            className="unified-btn-secondary flex items-center justify-center space-x-2"
           >
             <FileText className="h-5 w-5 text-red-600" />
             <span>Export ke PDF</span>
@@ -126,7 +126,7 @@ export function ProfileView() {
           
           <button
             onClick={handleExportExcel}
-            className="flex items-center justify-center space-x-2 p-4 border border-gray-300 rounded-xl hover:bg-gray-50 transition-colors"
+            className="unified-btn-secondary flex items-center justify-center space-x-2"
           >
             <FileSpreadsheet className="h-5 w-5 text-green-600" />
             <span>Export ke Excel</span>
@@ -135,11 +135,11 @@ export function ProfileView() {
       </div>
 
       {/* Logout Card */}
-      <div className="bg-white rounded-2xl shadow-md p-6">
+      <div className="unified-card unified-spacing">
         <button
           onClick={handleSignOut}
           disabled={loading}
-          className="w-full flex items-center justify-center space-x-2 p-4 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-3 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <LogOut className="h-5 w-5" />
           <span>{loading ? 'Memproses...' : 'Keluar'}</span>
