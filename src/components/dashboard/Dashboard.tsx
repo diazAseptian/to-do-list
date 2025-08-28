@@ -132,9 +132,9 @@ export function Dashboard() {
         {/* Menu Button - Mobile Only */}
         <button
           onClick={() => setShowSidebar(true)}
-          className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          className="md:hidden p-1 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors"
         >
-          <Menu className="h-6 w-6 text-gray-600" />
+          <Menu className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
         </button>
         
         <div className="flex-1 lg:flex-none">
@@ -154,7 +154,7 @@ export function Dashboard() {
             onClick={handleAddTask}
             className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors text-sm sm:text-base"
           >
-            <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
+            <Plus className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
             <span className="hidden sm:inline">Tambah Tugas</span>
           </button>
         )}
@@ -183,7 +183,7 @@ export function Dashboard() {
 
             {/* Search Bar */}
             <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Search className="absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5" />
               <input
                 type="text"
                 placeholder="Cari tugas..."
@@ -234,8 +234,8 @@ export function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:block">
+      {/* Sidebar - Always visible on desktop, overlay on mobile */}
+      <div className="hidden md:block">
         <Sidebar
           currentFilter={currentFilter}
           onFilterChange={setCurrentFilter}
@@ -246,7 +246,7 @@ export function Dashboard() {
 
       {/* Mobile Sidebar Overlay */}
       {showSidebar && (
-        <div className="lg:hidden fixed inset-0 z-50">
+        <div className="md:hidden fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setShowSidebar(false)} />
           <div className="relative w-64 h-full bg-white">
             <div className="flex justify-end p-4">
@@ -254,14 +254,14 @@ export function Dashboard() {
                 onClick={() => setShowSidebar(false)}
                 className="p-2 hover:bg-gray-100 rounded-lg"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             </div>
             
             <div className="px-4 pb-4">
               <div className="space-y-2">
                 <button
-                  onClick={() => setCurrentView('tasks')}
+                  onClick={() => { setCurrentView('tasks'); setShowSidebar(false); }}
                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                     currentView === 'tasks' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
                   }`}
@@ -271,7 +271,7 @@ export function Dashboard() {
                 </button>
                 
                 <button
-                  onClick={() => setCurrentView('calendar')}
+                  onClick={() => { setCurrentView('calendar'); setShowSidebar(false); }}
                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                     currentView === 'calendar' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
                   }`}
@@ -281,7 +281,7 @@ export function Dashboard() {
                 </button>
                 
                 <button
-                  onClick={() => setCurrentView('profile')}
+                  onClick={() => { setCurrentView('profile'); setShowSidebar(false); }}
                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                     currentView === 'profile' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
                   }`}
@@ -301,6 +301,7 @@ export function Dashboard() {
                     onClick={() => {
                       setCurrentFilter(category);
                       setCurrentView('tasks');
+                      setShowSidebar(false);
                     }}
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
                       currentFilter === category && currentView === 'tasks' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
@@ -317,8 +318,8 @@ export function Dashboard() {
       )}
 
       {/* Main Content */}
-      <div className="lg:pl-64">
-        <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+      <div className="md:pl-48 lg:pl-64">
+        <div className="p-3 sm:p-4 md:p-6 lg:p-8 max-w-7xl mx-auto">
           {renderMainContent()}
         </div>
       </div>

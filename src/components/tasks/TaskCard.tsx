@@ -66,15 +66,15 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
         <div className="flex space-x-1 ml-2">
           <button
             onClick={() => onEdit(task)}
-            className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+            className="p-1 sm:p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
           >
-            <Edit className="h-4 w-4" />
+            <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
           </button>
           <button
             onClick={() => onDelete(task.id)}
-            className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+            className="p-1 sm:p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
           >
-            <Trash2 className="h-4 w-4" />
+            <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
           </button>
         </div>
       </div>
@@ -87,12 +87,12 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
         <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-gray-500">
           {task.deadline && (
             <div className={`flex items-center space-x-1 ${isOverdue ? 'text-red-600' : isDueSoon ? 'text-yellow-600' : ''}`}>
-              <Calendar className="h-4 w-4" />
-              <span>{format(new Date(task.deadline), 'dd/MM/yyyy')}</span>
+              <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span>{format(new Date(task.deadline), 'dd MMM yyyy, HH:mm')}</span>
             </div>
           )}
           <div className="flex items-center space-x-1">
-            <Clock className="h-4 w-4" />
+            <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
             <span>{format(new Date(task.created_at), 'dd/MM/yyyy')}</span>
           </div>
         </div>
@@ -102,7 +102,7 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
             onClick={() => onStatusUpdate(task.id, 'Selesai')}
             className="flex items-center justify-center space-x-1 text-green-600 hover:text-green-700 hover:bg-green-50 px-3 py-2 rounded-lg transition-all self-start sm:self-auto"
           >
-            <CheckCircle className="h-4 w-4" />
+            <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4" />
             <span className="text-sm font-medium">Selesai</span>
           </button>
         )}

@@ -13,18 +13,23 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
     judul: '',
     kategori: 'Kuliah' as Task['kategori'],
     prioritas: 'Medium' as Task['prioritas'],
-    deadline: '',
+    deadlineDate: '',
+    deadlineTime: '',
     status: 'Belum dikerjakan' as Task['status'],
     deskripsi: '',
   });
 
   useEffect(() => {
     if (task) {
+      const deadlineDate = task.deadline ? new Date(task.deadline).toISOString().slice(0, 10) : '';
+      const deadlineTime = task.deadline ? new Date(task.deadline).toISOString().slice(11, 16) : '';
+      
       setFormData({
         judul: task.judul,
         kategori: task.kategori,
         prioritas: task.prioritas,
-        deadline: task.deadline || '',
+        deadlineDate,
+        deadlineTime,
         status: task.status,
         deskripsi: task.deskripsi || '',
       });
@@ -35,9 +40,20 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
     e.preventDefault();
     
     // Pastikan data sesuai dengan schema
+    let deadline = null;
+    if (formData.deadlineDate) {
+      const dateTime = formData.deadlineTime 
+        ? `${formData.deadlineDate}T${formData.deadlineTime}:00`
+        : `${formData.deadlineDate}T23:59:59`;
+      deadline = new Date(dateTime).toISOString();
+    }
+    
     const cleanData = {
-      ...formData,
-      deadline: formData.deadline || null,
+      judul: formData.judul,
+      kategori: formData.kategori,
+      prioritas: formData.prioritas,
+      deadline,
+      status: formData.status,
       deskripsi: formData.deskripsi || ''
     };
     
@@ -62,9 +78,9 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
           </h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-1 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 
@@ -74,7 +90,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
               Judul Tugas *
             </label>
             <div className="relative">
-              <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <FileText className="absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5" />
               <input
                 type="text"
                 value={formData.judul}
@@ -92,7 +108,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
                 Kategori
               </label>
               <div className="relative">
-                <Tag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Tag className="absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5" />
                 <select
                   value={formData.kategori}
                   onChange={(e) => handleChange('kategori', e.target.value)}
@@ -111,7 +127,7 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
                 Prioritas
               </label>
               <div className="relative">
-                <AlertTriangle className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <AlertTriangle className="absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5" />
                 <select
                   value={formData.prioritas}
                   onChange={(e) => handleChange('prioritas', e.target.value)}
@@ -125,36 +141,44 @@ export function TaskForm({ task, onSubmit, onClose }: TaskFormProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Deadline
-              </label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Deadline
+            </label>
+            <div className="grid grid-cols-2 gap-3">
               <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Calendar className="absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5" />
                 <input
                   type="date"
-                  value={formData.deadline}
-                  onChange={(e) => handleChange('deadline', e.target.value)}
+                  value={formData.deadlineDate}
+                  onChange={(e) => handleChange('deadlineDate', e.target.value)}
                   className="unified-input pl-10"
+                  placeholder="Tanggal"
                 />
               </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Status
-              </label>
-              <select
-                value={formData.status}
-                onChange={(e) => handleChange('status', e.target.value)}
+              <input
+                type="time"
+                value={formData.deadlineTime}
+                onChange={(e) => handleChange('deadlineTime', e.target.value)}
                 className="unified-input"
-              >
-                <option value="Belum dikerjakan">Belum dikerjakan</option>
-                <option value="Sedang dikerjakan">Sedang dikerjakan</option>
-                <option value="Selesai">Selesai</option>
-              </select>
+                placeholder="Jam"
+              />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Status
+            </label>
+            <select
+              value={formData.status}
+              onChange={(e) => handleChange('status', e.target.value)}
+              className="unified-input"
+            >
+              <option value="Belum dikerjakan">Belum dikerjakan</option>
+              <option value="Sedang dikerjakan">Sedang dikerjakan</option>
+              <option value="Selesai">Selesai</option>
+            </select>
           </div>
 
           <div>

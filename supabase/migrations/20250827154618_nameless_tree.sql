@@ -8,7 +8,7 @@
       - `judul` (text, not null)
       - `kategori` (text with check constraint)
       - `prioritas` (text with check constraint)
-      - `deadline` (date)
+      - `deadline` (timestamptz)
       - `status` (text with check constraint)
       - `deskripsi` (text)
       - `created_at` (timestamptz with default)
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS tasks (
   judul text NOT NULL,
   kategori text NOT NULL CHECK (kategori IN ('Kuliah', 'Himpunan', 'Skripsi', 'Kerja')),
   prioritas text NOT NULL CHECK (prioritas IN ('High', 'Medium', 'Low')) DEFAULT 'Medium',
-  deadline date,
+  deadline timestamptz,
   status text NOT NULL CHECK (status IN ('Belum dikerjakan', 'Sedang dikerjakan', 'Selesai')) DEFAULT 'Belum dikerjakan',
   deskripsi text DEFAULT '',
   created_at timestamptz DEFAULT now()

@@ -39,14 +39,14 @@ export function FilterModal({ onClose, onApplyFilters, currentFilters }: FilterM
       <div className="unified-card rounded-t-2xl lg:rounded-2xl w-full max-w-md">
         <div className="flex justify-between items-center p-6 border-b">
           <div className="flex items-center space-x-2">
-            <Filter className="h-5 w-5 text-blue-600" />
+            <Filter className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
             <h2 className="text-xl font-semibold text-gray-900">Filter & Urutkan</h2>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-1 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 

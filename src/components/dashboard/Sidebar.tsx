@@ -24,17 +24,17 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
   ];
 
   return (
-    <div className="flex w-48 sm:w-56 lg:w-64 flex-col fixed inset-y-0">
+    <div className="flex w-48 lg:w-64 flex-col fixed inset-y-0">
       <div className="flex-1 flex flex-col min-h-0 sidebar-unified">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-          <div className="flex items-center flex-shrink-0 px-2 sm:px-3 lg:px-4">
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">TaskFlow</h1>
+          <div className="flex items-center flex-shrink-0 px-3 lg:px-4">
+            <h1 className="text-xl lg:text-2xl font-bold text-gray-900">TaskFlow</h1>
           </div>
 
           {/* Navigation Views */}
-          <nav className="mt-6 sm:mt-8 flex-1 px-2 sm:px-3 lg:px-4 space-y-1">
+          <nav className="mt-8 flex-1 px-3 lg:px-4 space-y-1">
             <div className="mb-4">
-              <h3 className="px-1 sm:px-2 lg:px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <h3 className="px-2 lg:px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                 Menu
               </h3>
             </div>
@@ -48,10 +48,10 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
                     currentView === view.id
                       ? 'bg-blue-50 border-blue-500 text-blue-700 shadow-sm'
                       : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                  } group flex items-center px-2 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm font-medium border-r-2 w-full rounded-lg transition-all`}
+                  } group flex items-center px-3 py-3 text-sm font-medium border-r-2 w-full rounded-lg transition-all`}
                 >
-                  <Icon className="flex-shrink-0 -ml-1 mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5" />
-                  <span className="hidden sm:inline">{view.label}</span>
+                  <Icon className="flex-shrink-0 -ml-1 mr-3 h-5 w-5" />
+                  <span>{view.label}</span>
                 </button>
               );
             })}
@@ -59,9 +59,9 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
             {/* Category Filters */}
             {currentView === 'tasks' && (
               <>
-                <div className="mt-6 sm:mt-8 mb-4">
-                  <h3 className="px-1 sm:px-2 lg:px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    <span className="hidden sm:inline">Kategori</span>
+                <div className="mt-8 mb-4">
+                  <h3 className="px-2 lg:px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Kategori
                   </h3>
                 </div>
                 {categories.map((category) => {
@@ -74,10 +74,10 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
                         currentFilter === category.id
                           ? 'bg-gray-50 text-gray-900 border-r-2 border-blue-500 shadow-sm'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                      } group flex items-center px-2 sm:px-3 py-2 sm:py-3 text-xs sm:text-sm font-medium w-full rounded-lg transition-all`}
+                      } group flex items-center px-3 py-3 text-sm font-medium w-full rounded-lg transition-all`}
                     >
-                      <Icon className={`flex-shrink-0 -ml-1 mr-2 sm:mr-3 h-4 w-4 sm:h-5 sm:w-5 ${category.color}`} />
-                      <span className="hidden sm:inline">{category.label}</span>
+                      <Icon className={`flex-shrink-0 -ml-1 mr-3 h-5 w-5 ${category.color}`} />
+                      <span>{category.label}</span>
                     </button>
                   );
                 })}

@@ -19,29 +19,36 @@ export const requestNotificationPermission = async (): Promise<boolean> => {
   return false;
 };
 
-export const checkDeadlineReminders = (tasks: Task[]) => {
-  const tomorrow = addDays(startOfDay(new Date()), 1);
+export const checkDailyReminders = (tasks: Task[]) => {
+  const now = new Date();
+  const currentHour = now.getHours();
   
-  const upcomingTasks = tasks.filter(task => {
-    if (!task.deadline || task.status === 'Selesai') return false;
+  // Only send notifications at 10 AM or 7 PM
+  if (currentHour !== 10 && currentHour !== 19) {
+    return [];
+  }
+  
+  const pendingTasks = tasks.filter(task => {
+    if (task.status === 'Selesai') return false;
     
-    const taskDeadline = startOfDay(new Date(task.deadline));
-    
-    // Check if deadline is tomorrow (H-1)
-    return taskDeadline.getTime() === tomorrow.getTime();
+    // Show all pending and in-progress tasks
+    return task.status === 'Belum dikerjakan' || task.status === 'Sedang dikerjakan';
   });
 
-  if (upcomingTasks.length > 0 && Notification.permission === 'granted') {
-    upcomingTasks.forEach(task => {
-      new Notification(`Reminder: ${task.judul}`, {
-        body: `Deadline besok! Kategori: ${task.kategori}`,
-        icon: '/vite.svg',
-        tag: `task-${task.id}`,
-      });
+  if (pendingTasks.length > 0 && Notification.permission === 'granted') {
+    const timeOfDay = currentHour === 10 ? 'Pagi' : 'Malam';
+    const message = currentHour === 10 
+      ? 'Selamat pagi! Jangan lupa kerjakan tugas hari ini'
+      : 'Selamat malam! Cek progress tugas hari ini';
+    
+    new Notification(`Reminder ${timeOfDay}`, {
+      body: `${message}. Kamu punya ${pendingTasks.length} tugas yang belum selesai.`,
+      icon: '/vite.svg',
+      tag: `daily-reminder-${currentHour}`,
     });
   }
 
-  return upcomingTasks;
+  return pendingTasks;
 };
 
 export const scheduleNotificationCheck = (tasks: Task[]) => {
@@ -49,12 +56,12 @@ export const scheduleNotificationCheck = (tasks: Task[]) => {
   const checkInterval = 60 * 60 * 1000; // 1 hour in milliseconds
   
   const intervalId = setInterval(() => {
-    checkDeadlineReminders(tasks);
+    checkDailyReminders(tasks);
   }, checkInterval);
 
   // Initial check
   setTimeout(() => {
-    checkDeadlineReminders(tasks);
+    checkDailyReminders(tasks);
   }, 1000);
 
   return intervalId;
