@@ -10,7 +10,7 @@ interface MobileNavigationProps {
 
 export function MobileNavigation({ currentView, onViewChange, onAddTask, onShowFilters }: MobileNavigationProps) {
   return (
-    <div className="mobile-nav-unified lg:hidden">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 shadow-lg">
       <div className="grid grid-cols-5 h-16">
         <button
           onClick={() => onViewChange('tasks')}

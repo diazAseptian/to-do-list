@@ -8,7 +8,7 @@ import { CalendarView } from '../calendar/CalendarView';
 import { ProfileView } from '../profile/ProfileView';
 import { useTasks } from '../../hooks/useTasks';
 import { Task } from '../../lib/supabase';
-import { Plus, Search, SortAsc } from 'lucide-react';
+import { Plus, Search, SortAsc, Menu, X } from 'lucide-react';
 import { requestNotificationPermission, scheduleNotificationCheck } from '../../utils/notifications';
 
 export function Dashboard() {
@@ -18,6 +18,7 @@ export function Dashboard() {
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSidebar, setShowSidebar] = useState(false);
   
   const [filters, setFilters] = useState<FilterOptions>({
     status: 'Semua',
@@ -126,34 +127,59 @@ export function Dashboard() {
   };
 
   const renderMainContent = () => {
+    const headerContent = (
+      <div className="flex items-center justify-between mb-6">
+        {/* Menu Button - Mobile Only */}
+        <button
+          onClick={() => setShowSidebar(true)}
+          className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          <Menu className="h-6 w-6 text-gray-600" />
+        </button>
+        
+        <div className="flex-1 lg:flex-none">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+            {currentView === 'tasks' ? (currentFilter === 'Semua' ? 'Semua Tugas' : currentFilter) : 
+             currentView === 'calendar' ? 'Kalender' : 'Profil'}
+          </h1>
+          {currentView === 'tasks' && (
+            <p className="text-sm sm:text-base text-gray-600">
+              {filteredTasks.length} dari {tasks.length} tugas
+            </p>
+          )}
+        </div>
+
+        {currentView === 'tasks' && (
+          <button
+            onClick={handleAddTask}
+            className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors text-sm sm:text-base"
+          >
+            <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="hidden sm:inline">Tambah Tugas</span>
+          </button>
+        )}
+      </div>
+    );
+
     switch (currentView) {
       case 'calendar':
-        return <CalendarView tasks={tasks} />;
+        return (
+          <>
+            {headerContent}
+            <CalendarView tasks={tasks} />
+          </>
+        );
       case 'profile':
-        return <ProfileView />;
+        return (
+          <>
+            {headerContent}
+            <ProfileView />
+          </>
+        );
       default:
         return (
           <>
-            {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-              <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
-                  {currentFilter === 'Semua' ? 'Semua Tugas' : currentFilter}
-                </h1>
-                <p className="text-sm sm:text-base text-gray-600">
-                  {filteredTasks.length} dari {tasks.length} tugas
-                </p>
-              </div>
-
-              {/* Add Button - Always visible */}
-              <button
-                onClick={handleAddTask}
-                className="flex items-center space-x-2 unified-btn-primary text-sm sm:text-base"
-              >
-                <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
-                <span>Tambah Tugas</span>
-              </button>
-            </div>
+            {headerContent}
 
             {/* Search Bar */}
             <div className="relative mb-6">
@@ -208,20 +234,96 @@ export function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Sidebar - Always visible */}
-      <Sidebar
-        currentFilter={currentFilter}
-        onFilterChange={setCurrentFilter}
-        onViewChange={setCurrentView}
-        currentView={currentView}
-      />
+      {/* Desktop Sidebar */}
+      <div className="hidden lg:block">
+        <Sidebar
+          currentFilter={currentFilter}
+          onFilterChange={setCurrentFilter}
+          onViewChange={setCurrentView}
+          currentView={currentView}
+        />
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
+      {showSidebar && (
+        <div className="lg:hidden fixed inset-0 z-50">
+          <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setShowSidebar(false)} />
+          <div className="relative w-64 h-full bg-white">
+            <div className="flex justify-end p-4">
+              <button
+                onClick={() => setShowSidebar(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <div className="px-4 pb-4">
+              <div className="space-y-2">
+                <button
+                  onClick={() => setCurrentView('tasks')}
+                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                    currentView === 'tasks' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <span>📋</span>
+                  <span>Tugas</span>
+                </button>
+                
+                <button
+                  onClick={() => setCurrentView('calendar')}
+                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                    currentView === 'calendar' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <span>📅</span>
+                  <span>Kalender</span>
+                </button>
+                
+                <button
+                  onClick={() => setCurrentView('profile')}
+                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                    currentView === 'profile' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <span>👤</span>
+                  <span>Profil</span>
+                </button>
+              </div>
+              
+              <hr className="my-4" />
+              
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-gray-500 px-3">Kategori</p>
+                {['Semua', 'Kuliah', 'Himpunan', 'Skripsi', 'Kerja'].map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => {
+                      setCurrentFilter(category);
+                      setCurrentView('tasks');
+                    }}
+                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                      currentFilter === category && currentView === 'tasks' ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    <span>{category === 'Semua' ? '📂' : category === 'Kuliah' ? '🎓' : category === 'Himpunan' ? '👥' : category === 'Skripsi' ? '📝' : '💼'}</span>
+                    <span>{category}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
-      <div className="pl-48 sm:pl-56 lg:pl-64">
-        <div className="unified-container unified-spacing">
+      <div className="lg:pl-64">
+        <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
           {renderMainContent()}
         </div>
       </div>
+
+
 
       {/* Modals */}
       {showTaskForm && (
