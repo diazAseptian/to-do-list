@@ -13,29 +13,29 @@ interface TaskCardProps {
 export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardProps) {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'High': return 'bg-red-100 text-red-800';
-      case 'Medium': return 'bg-yellow-100 text-yellow-800';
-      case 'Low': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'High': return 'bg-red-100 text-red-900 font-semibold';
+      case 'Medium': return 'bg-yellow-100 text-yellow-900 font-semibold';
+      case 'Low': return 'bg-green-100 text-green-900 font-semibold';
+      default: return 'bg-gray-100 text-gray-900 font-semibold';
     }
   };
 
   const getCategoryColor = (kategori: string) => {
     switch (kategori) {
-      case 'Kuliah': return 'bg-blue-100 text-blue-800';
-      case 'Himpunan': return 'bg-purple-100 text-purple-800';
-      case 'Skripsi': return 'bg-green-100 text-green-800';
-      case 'Kerja': return 'bg-orange-100 text-orange-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'Kuliah': return 'bg-blue-100 text-blue-900 font-semibold';
+      case 'Himpunan': return 'bg-purple-100 text-purple-900 font-semibold';
+      case 'Skripsi': return 'bg-green-100 text-green-900 font-semibold';
+      case 'Kerja': return 'bg-orange-100 text-orange-900 font-semibold';
+      default: return 'bg-gray-100 text-gray-900 font-semibold';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Selesai': return 'bg-green-100 text-green-800';
-      case 'Sedang dikerjakan': return 'bg-blue-100 text-blue-800';
-      case 'Belum dikerjakan': return 'bg-gray-100 text-gray-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'Selesai': return 'bg-green-100 text-green-900 font-semibold';
+      case 'Sedang dikerjakan': return 'bg-blue-100 text-blue-900 font-semibold';
+      case 'Belum dikerjakan': return 'bg-gray-100 text-gray-900 font-semibold';
+      default: return 'bg-gray-100 text-gray-900 font-semibold';
     }
   };
 
@@ -45,7 +45,7 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
 
   return (
     <div className={`unified-card p-4 sm:p-6 border-l-4 ${
-      isOverdue ? 'border-red-500' : isDueSoon ? 'border-yellow-500' : 'border-blue-500'
+      isOverdue ? 'border-red-500 bg-red-50' : isDueSoon ? 'border-orange-500 bg-orange-50' : 'border-blue-500'
     }`}>
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1 min-w-0">
@@ -66,15 +66,17 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
         <div className="flex space-x-1 ml-2">
           <button
             onClick={() => onEdit(task)}
-            className="p-1 sm:p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+            className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+            title="Edit tugas"
           >
-            <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
+            <Edit className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
           <button
             onClick={() => onDelete(task.id)}
-            className="p-1 sm:p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+            className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+            title="Hapus tugas"
           >
-            <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+            <Trash2 className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
       </div>
@@ -86,7 +88,7 @@ export function TaskCard({ task, onEdit, onDelete, onStatusUpdate }: TaskCardPro
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-gray-500">
           {task.deadline && (
-            <div className={`flex items-center space-x-1 ${isOverdue ? 'text-red-600' : isDueSoon ? 'text-yellow-600' : ''}`}>
+            <div className={`flex items-center space-x-1 ${isOverdue ? 'text-red-700 font-semibold' : isDueSoon ? 'text-orange-700 font-semibold' : ''}`}>
               <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
               <span>{format(new Date(task.deadline), 'dd MMM yyyy, HH:mm')}</span>
             </div>

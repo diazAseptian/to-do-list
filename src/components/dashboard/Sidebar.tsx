@@ -28,7 +28,9 @@ export function Sidebar({ currentFilter, onFilterChange, onViewChange, currentVi
       <div className="flex-1 flex flex-col min-h-0 sidebar-unified">
         <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-3 lg:px-4">
-            <h1 className="text-xl lg:text-2xl font-bold text-gray-900">TaskFlow</h1>
+            <div>
+              <h1 className="text-xl lg:text-2xl font-bold text-gray-900">TaskMate Diaz</h1>
+            </div>
           </div>
 
           {/* Navigation Views */}

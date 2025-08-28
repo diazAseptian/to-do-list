@@ -1,27 +1,37 @@
 import { useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
+import { performLogout } from '../utils/authUtils';
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
+    
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
+      if (mounted) {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
     });
 
     // Listen for auth changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (mounted) {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signUp = async (email: string, password: string) => {
@@ -61,8 +71,23 @@ export function useAuth() {
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    return { error };
+    try {
+      const result = await performLogout();
+      
+      // Force clear local state
+      setUser(null);
+      
+      if (result.success) {
+        return { error: null };
+      } else {
+        return { error: result.error };
+      }
+    } catch (error: any) {
+      console.error('Logout error:', error);
+      // Force clear local state even on error
+      setUser(null);
+      return { error };
+    }
   };
 
   return {

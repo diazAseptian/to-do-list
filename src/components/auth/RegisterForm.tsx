@@ -58,8 +58,8 @@ export function RegisterForm({ onToggleMode }: RegisterFormProps) {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-slate-100 p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Daftar</h1>
-          <p className="text-gray-600">Buat akun baru untuk mulai</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">TaskMate Diaz</h1>
+          <p className="text-gray-600">Daftar akun baru</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">

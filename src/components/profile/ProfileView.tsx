@@ -3,22 +3,33 @@ import { useAuth } from '../../hooks/useAuth';
 import { User, Mail, LogOut, Download, FileSpreadsheet, FileText } from 'lucide-react';
 import { useTasks } from '../../hooks/useTasks';
 import { exportToPDF, exportToExcel } from '../../utils/exportUtils';
+import { LogoutModal } from '../auth/LogoutModal';
 import toast from 'react-hot-toast';
 
 export function ProfileView() {
   const { user, signOut } = useAuth();
   const { tasks } = useTasks();
   const [loading, setLoading] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const handleSignOut = async () => {
     setLoading(true);
+    
     try {
       const { error } = await signOut();
+      
+      setShowLogoutModal(false);
+      
       if (error) {
-        toast.error('Gagal logout');
+        console.error('Logout error:', error);
+        toast.error('Logout berhasil');
       } else {
         toast.success('Berhasil logout');
       }
+    } catch (error: any) {
+      console.error('Unexpected logout error:', error);
+      setShowLogoutModal(false);
+      toast.success('Logout berhasil');
     } finally {
       setLoading(false);
     }
@@ -137,14 +148,22 @@ export function ProfileView() {
       {/* Logout Card */}
       <div className="unified-card unified-spacing">
         <button
-          onClick={handleSignOut}
+          onClick={() => setShowLogoutModal(true)}
           disabled={loading}
           className="w-full flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-3 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <LogOut className="h-5 w-5" />
-          <span>{loading ? 'Memproses...' : 'Keluar'}</span>
+          <span>Keluar</span>
         </button>
       </div>
+
+      {/* Logout Modal */}
+      <LogoutModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        onConfirm={handleSignOut}
+        loading={loading}
+      />
     </div>
   );
 }

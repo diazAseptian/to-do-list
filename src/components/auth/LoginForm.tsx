@@ -34,8 +34,8 @@ export function LoginForm({ onToggleMode }: LoginFormProps) {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-slate-100 p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Masuk</h1>
-          <p className="text-gray-600">Kelola tugas Anda dengan mudah</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">TaskMate Diaz</h1>
+          <p className="text-gray-600">Masuk ke akun Anda</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">

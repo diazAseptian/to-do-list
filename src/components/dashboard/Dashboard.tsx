@@ -182,7 +182,7 @@ export function Dashboard() {
             {headerContent}
 
             {/* Search Bar */}
-            <div className="relative mb-6">
+            <div className="relative mb-4">
               <Search className="absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 sm:h-5 sm:w-5" />
               <input
                 type="text"
@@ -191,6 +191,23 @@ export function Dashboard() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="unified-input pl-10"
               />
+            </div>
+
+            {/* Status Filter */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {['Semua', 'Belum dikerjakan', 'Sedang dikerjakan', 'Selesai'].map((status) => (
+                <button
+                  key={status}
+                  onClick={() => setFilters(prev => ({ ...prev, status }))}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    filters.status === status
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {status}
+                </button>
+              ))}
             </div>
 
             {/* Tasks Grid */}
